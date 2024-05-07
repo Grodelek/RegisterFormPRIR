@@ -1,23 +1,48 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>User Account</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<h1>Admin Panel</h1>
-	</div>
-	<div class="row">Logged in : <strong>{{session.name}} | <a href="{{ url_for('logout') }}"> Logout</a>
-    </strong>
-	</div>
-	<br><br>
-	<div class="row">
-		<h1>Admin Panel</h1>
-	</div>
+    <div class="row mt-4">
+        <div class="col">
+            <h1>Admin Panel</h1>
+            <p>
+                Logged in as: <strong>{{ session.name }}</strong>
+                | <a href="{{ url_for('logout') }}">Logout</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col">
+            <h2>All Posts</h2>
+            {% if posts %}
+                <ul class="list-group">
+                    {% for post in posts %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>By:</strong> {{ post.user_name }}<br>
+                                {{ post.content }}
+                            </div>
+                            <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts found.</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
+<!-- Bootstrap scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
