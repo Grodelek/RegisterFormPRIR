@@ -5,11 +5,13 @@ import re
 
 app = Flask(__name__)
 
-app.secret_key = 'xyzsdfg'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'user-system'
+
+app.secret_key = 'ahpoiju'
+app.config['MYSQL_USER'] = 'root'  # Nazwa użytkownika MySQL
+app.config['MYSQL_PASSWORD'] = ''  # Hasło do MySQL
+app.config['MYSQL_DB'] = 'user'  # Nazwa bazy danych
+app.config['MYSQL_HOST'] = 'localhost'  # Gdzie znajduje się serwer MySQL
+app.config['MYSQL_PORT'] = 3307  # Domyślny port MySQL w XAMPP
 
 mysql = MySQL(app)
 
