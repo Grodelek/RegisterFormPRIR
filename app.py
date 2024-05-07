@@ -35,7 +35,11 @@ def login():
                 session['name'] = user['name']
                 session['email'] = user['email']
                 mesage = 'Logged in successfully!'
+                if email == 'admin@system.com':
+                    return redirect(url_for('admin'))
+
                 return render_template('user.html', mesage=mesage)
+
             else:
                 mesage = 'Please enter correct email/password!'
                 return render_template('login.html', mesage=mesage)
@@ -44,6 +48,12 @@ def login():
 
     # Upewnij się, że funkcja zawsze zwraca odpowiedź
     return render_template('login.html', mesage=mesage)
+
+
+@app.route('/admin', methods=['GET'])
+def admin():
+    return render_template('admin.html')
+
 
 @app.route('/logout')
 def logout():
